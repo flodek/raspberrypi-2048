@@ -2,7 +2,7 @@
 2048 game adapted for raspberry pi sense hat
 Because there is not enough space on sense hat to place the numbers, they are coded as below
 
-![screenshot](docs/pic1.jpg)
+![screenshot](docs/blocks.png)
 
 Below is a photo of how it looks like on a real device
 
