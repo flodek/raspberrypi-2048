@@ -27,13 +27,17 @@ while True:
     for event in hat.stick.get_events():
         if event.action == "pressed":
             if event.direction == "up":
-                board = b.shift_up(board)
+                new_board = b.shift_up(board)
             elif event.direction == "down":
-                board = b.shift_down(board)
-            elif event.direction == "left": 
-                board = b.shift_left(board)
+                new_board = b.shift_down(board)
+            elif event.direction == "left":
+                new_board = b.shift_left(board)
             elif event.direction == "right":
-                board = b.shift_right(board)
+                new_board = b.shift_right(board)
+
+            if(np.array_equal(new_board, board)):
+                continue
+            board = new_board
 
             hat.set_pixels(d.board2pixels(board))
             time.sleep(0.5)

@@ -19,36 +19,36 @@ def add_new_number(board):
     
     return new_board
 
-def shift_right(board):
-    new_board = np.copy(board)
-    
+def merge_line(line, directions='r'):
+    line = line[np.nonzero(line)].tolist()
+    j = 0
+    while j < (len(line) - 1):
+        if (line[j]==line[j+1]):
+            line[j] *= 2
+            del line[j+1]
+        j += 1
+    return [0] * (4 - len(line)) + line if directions=='r' else line + [0] * (4 - len(line))
+
+def shift_right(matrix):
+    res = np.copy(matrix)
     for i in range(4):
-        for j in range(3, 0, -1):
-            for k in range(j - 1, -1, -1):
-                if(new_board[i][j] == new_board[i][k]):
-                    new_board[i][j] = new_board[i][j] + new_board[i][k]
-                    new_board[i][k] = 0
-                    if(new_board[i][j] != 0):
-                        break
-                else:
-                    if(new_board[i][j] == 0):
-                        new_board[i][j] = new_board[i][k]
-                        new_board[i][k] = 0
-                    else:
-                        if(new_board[i][k] != 0):
-                            break
+        res[i] = merge_line(res[i])
+    return res
 
-    return new_board
+def shift_left(matrix):
+    res = np.copy(matrix)
+    for i in range(4):
+        res[i] = merge_line(res[i], 'l')
+    return res
 
-def __shift_right_with_rotation(board, k):
-    new_board = np.rot90(np.copy(board), k)
-    return np.rot90(shift_right(new_board), 4 - k)
+def shift_down(matrix):
+    res = np.copy(matrix)
+    for i in range(4):
+        res[:, i] = merge_line(res[:, i])
+    return res
 
-def shift_down(board):
-    return __shift_right_with_rotation(board, 1)
-
-def shift_left(board):
-    return __shift_right_with_rotation(board, 2)
-
-def shift_up(board):
-    return __shift_right_with_rotation(board, 3)
+def shift_up(matrix):
+    res = np.copy(matrix)
+    for i in range(4):
+        res[:, i] = merge_line(res[:, i], 'l')
+    return res
