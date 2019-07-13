@@ -36,16 +36,16 @@ while True:
             elif event.direction == "right":
                 new_board = b.shift_right(board)
 
+            hat.set_pixels(d.board2pixels(new_board))
+            time.sleep(0.2)
+
+            if(b.get_num_ofempty(new_board) == 0):
+                hat.show_message("Game Over")
+                raise SystemExit(0)
+
             if(np.array_equal(new_board, board)):
                 continue
             board = new_board
-
-            hat.set_pixels(d.board2pixels(board))
-            time.sleep(0.5)
-
-            if(b.get_num_ofempty(board) == 0):
-                hat.show_message("Game Over")
-                break
 
             board = b.add_new_number(board)
             
