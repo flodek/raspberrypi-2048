@@ -2,6 +2,7 @@
 """
 Created on Mon Jul  8 23:08:31 2019
 
+@author: flodek (Volodymyr Shumara)
 """
 import numpy as np
 import random

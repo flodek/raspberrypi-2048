@@ -2,6 +2,7 @@
 """
 Created on Sun Jul  7 22:04:25 2019
 
+@author: flodek (Volodymyr Shumara)
 """
 from sense_hat import SenseHat
 import time
